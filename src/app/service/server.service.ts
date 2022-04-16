@@ -45,9 +45,13 @@ export class ServerService {
         {
           ...response,
           message: response.data.servers
-          .filter(server => server.status === status).length > 0 ? 'Servers filtered by : 'SERVER DOWN' } status' : 'No servers of ${status} found',
-          data: {servers: response.data.servers
-          .filter(server => server.status === status)}
+          .filter(server => server.status === status).length > 0 ? `Servers filtered by
+          ${status === Status.SERVER_UP ? 'SERVER UP'
+          : 'SERVER DOWN'} status` : `No servers of ${status} found`,
+          data: {
+            servers: response.data.servers
+            .filter(server => server.status === status)
+          }
         }
       );
       suscriber.complete();
@@ -57,8 +61,6 @@ export class ServerService {
     tap(console.log),
     catchError(this.handleError)
   );
-
-
 
   delete$ = (serverId: number) => <Observable<CustomResponse>>
   this.http.delete<CustomResponse>('${this.apiUrl}/server/delete/${serverId}')
@@ -73,8 +75,3 @@ export class ServerService {
   }
 
 }
-
-  // example of procedural way to request to backend
-  // getServers(): Observable<CustomResponse> {
-  //   return this.http.get<CustomResponse>('http://localhost:8089/api/server/list');
-  // }
