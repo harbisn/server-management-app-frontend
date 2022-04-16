@@ -1,6 +1,6 @@
 import { Status } from "../enum/status.enum";
 
-export interface server {
+export interface Server {
     id: number;
     ipAddress: string;
     name: string;
