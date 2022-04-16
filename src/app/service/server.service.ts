@@ -1,17 +1,17 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Server } from 'http';
 import { Observable, Subscriber, throwError } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 import { Status } from '../enum/status.enum';
 import { CustomResponse } from '../interface/custom-response';
+import { Server } from '../interface/server';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ServerService {
 
-  private readonly apiUrl = 'any';
+  private readonly apiUrl = 'http://localhost:8089/api';
 
   constructor(private http:HttpClient) { }
 
